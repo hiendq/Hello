@@ -12,12 +12,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-app.get('/hi', (req, res) => {
-    
-    res.send('Say Hi');
-})
-
-
 app.get('/', (req, res) => {
-    res.send(`Listening on ${ PORT }`);
+    res.send(`OK`);
 })
