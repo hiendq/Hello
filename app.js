@@ -1,11 +1,11 @@
 const express = require('express');
 
 const app = express();
-const POST =  5000;
+const port = process.env.PORT || 5000
 
 app.get('/', (req, res) => {
     res.send(`OK`);
 })
-app.listen(POST, function() {
-    console.log('Server listening on port ' + POST);
+app.listen(port, function() {
+    console.log('Server listening on port ' + port);
   });
