@@ -6,6 +6,9 @@ const changePassword = async (id, newPass) => {
 const changeInfo = async (id, name, phone, address) => {
   return await User.findByIdAndUpdate({_id: id}, {name : name, phone: phone, address: address});
 };
+const removeUserById = async(id) => {
+  return await User.remove({ _id: id });
+} 
   module.exports = {
     changePassword,
     changeInfo,
