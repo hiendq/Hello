@@ -8,3 +8,8 @@ module.exports.logUp = function(req, res) {
         .then(res.status(201).json({message: 'Done'}))
        
 }
+module.exports.login = function(req, res) {
+    res.status(201).json({message: 'Login here'})
+       
+}
+
