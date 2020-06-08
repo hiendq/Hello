@@ -19,4 +19,6 @@ const removeUserById = async(id) => {
   module.exports = {
     changePassword,
     changeInfo,
+    removeUserById,
+    findUserByID
   };
