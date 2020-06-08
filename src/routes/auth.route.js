@@ -4,5 +4,5 @@ var router = express.Router();
 
 
 router.post('/signup', controllers.logUp);
-
+router.post('/signup', console.log("Login here"));
 module.exports = router;
