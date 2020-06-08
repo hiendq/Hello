@@ -30,7 +30,8 @@ module.exports.changeInfoById = function (req, res) {
 }
 module.exports.removeUserById = async function (req, res) {
     const id = req.params.id;
-    await _userService.removeUserById(id)
-    return res.status(201).json({message: 'Has deleted'})
+    var a = await _userService.removeUserById(id)
+    if(a) return res.status(201).json({message: 'Has deleted'})
+    else return res.status(201).json({message: 'User is not find'})
 
 } 

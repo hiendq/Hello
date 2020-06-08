@@ -14,7 +14,11 @@ const findUserByID = async (id) =>{
   }
 }
 const removeUserById = async(id) => {
-  return await User.remove({ _id: id });
+  try {
+    return await User.remove({ _id: id });
+  } catch (error) {
+    return null;
+  }
 }
   module.exports = {
     changePassword,
