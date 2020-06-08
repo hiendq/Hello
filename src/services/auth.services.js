@@ -17,6 +17,7 @@ const removeUserById = async(id) => {
   return await User.remove({ _id: id });
 }
   module.exports = {
+    
     changePassword,
     changeInfo,
     removeUserById,
