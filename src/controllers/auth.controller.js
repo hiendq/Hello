@@ -11,3 +11,8 @@ module.exports.login = function(req, res) {
     const { email, password} = req.body;
     return res.status(201).json('Func login');
 }
+module.exports.login = function(req, res) {
+    res.status(201).json({message: 'Login here'})
+       
+}
+
