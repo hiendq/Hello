@@ -4,6 +4,7 @@ var router = express.Router();
 
 
 router.post('/signup', controllers.logUp);
-router.post('/signup', controllers.login);
-
+router.post('/login', controllers.login);
+router.get('/change_info/:id', controllers.getInfoById);
+router.post('/change_info/:id', controllers.changeInfoById);
 module.exports = router;
