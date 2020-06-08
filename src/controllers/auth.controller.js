@@ -28,3 +28,9 @@ module.exports.changeInfoById = function (req, res) {
     user.id = id;
     res.status(201).json({message: 'Get account Info'})
 }
+module.exports.removeUserById = async function (req, res) {
+    const id = req.params.id;
+    await _userService.removeUserById(id)
+    return res.status(201).json({message: 'Has deleted'})
+
+} 
