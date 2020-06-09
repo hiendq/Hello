@@ -14,16 +14,16 @@ const findUserByID = async (id) =>{
   }
 }
 const removeUserById = async(id) => {
-  try {
+  try{
     return await User.remove({ _id: id });
-  } catch (error) {
+  }catch(error){
     return null;
   }
 }
   module.exports = {
+    
     changePassword,
     changeInfo,
     removeUserById,
     findUserByID
-
   };
