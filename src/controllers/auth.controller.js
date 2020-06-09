@@ -24,5 +24,14 @@ module.exports.changeInfoById = function (req, res) {
     let userInfo = res.body;
     userInfo.id = id;
     console.log(userInfo)
+     console.log(userInfo)
+    res.status(201).json({message: 'Get account Info'})
+}
+module.exports.changeInfoById1 = function (req, res) {
+    const id=  req.params.id;
+    let userInfo = res.body;
+    userInfo.id = id;
+    console.log(userInfo)
+     console.log(userInfo)
     res.status(201).json({message: 'Get account Info'})
 }
