@@ -22,6 +22,7 @@ module.exports.getInfoById = async function (req, res) {
 module.exports.changeInfoById = function (req, res) {
     const id=  req.params.id;
     let userInfo = res.body;
-    user.id = id;
+    userInfo.id = id;
+    console.log(userInfo)
     res.status(201).json({message: 'Get account Info'})
 }
