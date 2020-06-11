@@ -7,7 +7,8 @@ var passport = require('passport');
 
 var authRoutes = require('./src/routes/auth.route');
 const District = require('./src/models/District.model')
-const Ward = require('./src/models/Ward.model')
+const Ward = require('./src/models/Ward.model');
+const City = require('./src/models/City.model')
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -27,26 +28,30 @@ app.use('/api/auth', authRoutes);
 
 app.get('/', async (req, res) => {
     console.log('---------')
-    await fetch('https://thongtindoanhnghiep.co/api/city/4/district', { method: 'GET'})
-    .then(res => res.json())
-    .then(json => json.map((item, index)=> {
-        const district = new District({city: 3, code: index, title: item.Title});
-        district.save();
-    }));
+    // await fetch('https://thongtindoanhnghiep.co/api/city/4/district', { method: 'GET'})
+    // .then(res => res.json())
+    // .then(json => json.map((item, index)=> {
+    //     const district = new District({city: 3, code: index, title: item.Title});
+    //     district.save();
+    // }));
     return res.status(200).json('Done')
 })
 
-// app.get('/:id', async (req, res) => {
-//     const id = req.params.id;
-//     await fetch(`https://thongtindoanhnghiep.co/api/district/${id}/ward`, { method: 'GET'})
-//     .then(res => res.json())
-//     .then(json => json.map((item, index)=> {
-//         const ward = new Ward({city: 3 ,district: 1, code: index, title: item.Title});
-//         ward.save();
-//         // console.log(ward)
-//     }));
-//     return res.status(200).json('Done')
-// })
+app.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    await fetch(`https://thongtindoanhnghiep.co/api/district/${id}/ward`, { method: 'GET'})
+    .then(res => res.json())
+    .then(json => json.map((item, index)=> {
+        const ward = new Ward({city: 3 ,district: 1, code: index, title: item.Title});
+        ward.save();
+        // console.log(ward)
+    }));
+    return res.status(200).json('Done')
+})
+app.get('/api/city', async (req, res) => {
+    City.find()
+    .then(result => res.status(201).json(result))
+})
 
 app.get('/api/city/:id', async (req, res) => {
     const id = req.params.id;
