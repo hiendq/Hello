@@ -48,7 +48,7 @@ app.get('/:id', async (req, res) => {
     }));
     return res.status(200).json('Done')
 })
-app.get('/api/city', async (req, res) => {
+app.get('/api/cities', async (req, res) => {
     City.find()
     .then(result => res.status(201).json(result))
 })
