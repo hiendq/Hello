@@ -76,7 +76,7 @@ app.get('/api/address/:idCity/:idDistrict/:idWard', async (req, res) => {
     const { idCity, idDistrict, idWard }= req.params;
     await City.find({code: idCity}).then(result => address = [...address,{city: result[0].title}])
     await District.find({city: idCity,code: idDistrict}).then(result => address = [...address,{district: result[0].title}])
-    await Ward.find({ city: idCity,code: idDistrict ,code: idWard}).then(result => address = [...address,{ward: result[0].title}])
+    await Ward.find({ city: idCity, district: idDistrict ,code: idWard}).then(result => address = [...address,{ward: result[0].title}])
     return res.status(201).json(address);
 }) 
 
