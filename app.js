@@ -28,27 +28,38 @@ app.use(passport.initialize());
 app.use('/api/auth', authRoutes);
 
 app.get('/', async (req, res) => {
-    console.log('---------')
+    // console.log('---------')
+    // District.find({city: 1})
+    //     .then(results => results.map(item=> item.remove()))
+    // return res.status(200).json('Done')
     // await fetch('https://thongtindoanhnghiep.co/api/city/4/district', { method: 'GET'})
     // .then(res => res.json())
     // .then(json => json.map((item, index)=> {
     //     const district = new District({city: 3, code: index, title: item.Title});
     //     district.save();
     // }));
-    return res.status(200).json('Done')
+
+    // let str =' Cẩm Lệ, Hải Châu, Liên Chiểu, Ngũ Hành Sơn, Thanh Khê'
+    // let arr = str.split(',')
+    // arr.map( async (item, index) => {
+    //     // const district = new District({city: 3, code: index, title: item})
+    //     await new District({city: 1, code: index, title: `Quận${item}`}).save();
+    // })
+
+    // let str =' Bưởi, Nhật Tân, Phú Thượng, Quảng An, Thụy Khuê, Tứ Liên, Xuân La, Yên Phụ.'
+    // let arr = str.split(',')
+    // arr.map( async (item, index) => {
+    //     // const district = new District({city: 3, code: index, title: item})
+    //     await new Ward({city: 2, district:10, code: index, title: `Phường${item}`}).save();
+    // })
+
+    return res.status(200).json(arr)
 })
 
-// app.get('/:id', async (req, res) => {
-//     const id = req.params.id;
-//     await fetch(`https://thongtindoanhnghiep.co/api/district/${id}/ward`, { method: 'GET'})
-//     .then(res => res.json())
-//     .then(json => json.map((item, index)=> {
-//         const ward = new Ward({city: 3 ,district: 1, code: index, title: item.Title});
-//         ward.save();
-//         // console.log(ward)
-//     }));
-//     return res.status(200).json('Done')
-// })
+app.get('/:id', async (req, res) => {
+    District.findByIdAndDelete({city: 3})
+    return res.status(200).json('Done')
+})
 app.get('/api/cities', async (req, res) => {
     City.find()
     .then(result => res.status(201).json(result))
@@ -64,8 +75,8 @@ app.get('/api/address/:idCity/:idDistrict/:idWard', async (req, res) => {
     let address = []
     const { idCity, idDistrict, idWard }= req.params;
     await City.find({code: idCity}).then(result => address = [...address,{city: result[0].title}])
-    await District.find({code: idDistrict}).then(result => address = [...address,{district: result[0].title}])
-    await Ward.find({code: idWard}).then(result => address = [...address,{ward: result[0].title}])
+    await District.find({city: idCity,code: idDistrict}).then(result => address = [...address,{district: result[0].title}])
+    await Ward.find({ city: idCity,code: idDistrict ,code: idWard}).then(result => address = [...address,{ward: result[0].title}])
     return res.status(201).json(address);
 }) 
 
