@@ -77,7 +77,7 @@ app.get('/api/address/:idCity/:idDistrict/:idWard', async (req, res) => {
     await City.find({code: idCity}).then(result => address = [...address,{city: result[0].title}])
     await District.find({city: idCity,code: idDistrict}).then(result => address = [...address,{district: result[0].title}])
     await Ward.find({ city: idCity, district: idDistrict ,code: idWard}).then(result => address = [...address,{ward: result[0].title}])
-    return res.status(201).json(address);
+    return res.status(201).json({address, str :`, ${address[2].ward}, ${address[1].district}, ${address[0].city}`});
 }) 
 
 app.get('/api/city/:idCity/district/:idDistrict', async (req, res) => {
