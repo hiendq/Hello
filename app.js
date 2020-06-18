@@ -53,7 +53,7 @@ app.get('/', async (req, res) => {
     //     await new Ward({city: 2, district:10, code: index, title: `Phường${item}`}).save();
     // })
 
-    return res.status(201).json(arr)
+    return res.status(201).json('Hi')
 })
 
 app.get('/:id', async (req, res) => {
