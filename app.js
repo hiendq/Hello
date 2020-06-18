@@ -53,12 +53,12 @@ app.get('/', async (req, res) => {
     //     await new Ward({city: 2, district:10, code: index, title: `Phường${item}`}).save();
     // })
 
-    return res.status(200).json(arr)
+    return res.status(201).json(arr)
 })
 
 app.get('/:id', async (req, res) => {
     District.findByIdAndDelete({city: 3})
-    return res.status(200).json('Done')
+    return res.status(201).json('Done')
 })
 app.get('/api/cities', async (req, res) => {
     City.find()
@@ -84,9 +84,28 @@ app.get('/api/city/:idCity/district/:idDistrict', async (req, res) => {
     const { idCity, idDistrict}= req.params;
     console.log(idCity, idDistrict)
     Ward.find({city: idCity, district: idDistrict})
-    .then(result => res.status(201).json(result))
+        .then(result => res.status(201).json(result))
 }) 
+
+app.post('/api/key_code',  async (req, res) => {
+    const { address } = req.body;
+    let result = {
+        apartment_number: '',
+        street: '',
+        ward: -1,
+        district: -1,
+        city: -1,
+    }
+    let list = address.split(',');
+    await Ward.find({title: list[1].trim()}).then(res =>  result.ward = res[0].code);
+    await District.find({title: list[2].trim()}).then(res =>  result.district = res[0].code);
+    await City.find({title: list[3].trim()}).then(res =>  result.city = res[0].code);
+    list = list[0].split(' ');
+    result.street = list[1];
+    result.apartment_number = list[0];
+   res.send(result)
+})
 
 app.listen(port, function() {
     console.log('Server listening on port ' + port);
-  });
+});
